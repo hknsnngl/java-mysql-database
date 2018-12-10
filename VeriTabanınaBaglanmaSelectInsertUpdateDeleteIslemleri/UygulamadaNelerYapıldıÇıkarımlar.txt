@@ -1,0 +1,46 @@
+Öncelikle JDBC connectoru projeye eklemeliyiz.
+
+>>>Bu uygulamada Veri tabanı ile bağlantı ve Select, Insert, Update, Delete islemleri sadece kod olarak gösterildi.
+
+
+>>	Veri tabanı uygulamaları yazmak için; <<
+
+
+
+>	Veri tabanına baglantı - Connection
+
+* Veri tabanı  ile java uygulaması arasında bir köprü kurmasını sağlar.
+* Bunu sağladığımız an Statement oluşturulabilir hale gelir.
+* Veri tabanına bağlanmak için iki sınıftan yararlanılır. Bunlar DriveManager ve DataSource
+Biz uygulamada Connection nesnesini oluşturmak için DriverManager sınıfının getConnection() metodu kullanırız.
+Bu metod 3 paremetrelidir, bağlantı adresi, veri tabanı kullanıcı adı ve veri tabanı kullanıcı şifresi
+* Veri tabanı ile işimiz bittiğinde Connection nesnesi ile Close() metodu kullanarak bağlantıyı kapatmalıyız.
+
+
+>	Veri tabanına sorgu gönderme - Statement
+
+* SQL sorgularını çalıştırmak (executeQuery() metodu ile) için Statement bileşene ihtiyaç vardır.
+* 3 Farklı Statemen bileşeni vardır. Bunlar Statement, PreparedStatement ve CallableStatement
+* Statement: Derleme olmaksızın çalştırılan en hızlı birleşen.
+
+* PreparedStatement: Ön derlemeden geçirilen statement dır. Bir sorgu bir kere derlenip tekrar tekrar kullanılabilir.
+Sorgu bir çok kez kullanıldığında Statemen'a göre daha iyi performanslıdır.
+Bir başka avantajı sql sorgularında değer girilmesi gereken yerlerde yer tutucu (?) görevi de yapabilir.Karmaşıklıktan kurtarır.
+
+
+>	Veri tabanından dönen verileri tutma - ResulSet
+
+* Veri tabanından dönen verileri tutan bileşenlerdir.
+* String tipi çekmek için getString(), int tipi kayıt çekmek için getInt() metodları kullanılır.
+
+
+> ?Execute()-ExecuteQuery()-ExecuteUpdate() farkları nedir?
+
+executeQuery () --- Bu genellikle veritabanının içeriğini okumak için kullanılır. Çıkış ResultSet şeklinde olacaktır . Genel olarak SELECT deyimi kullanılır. 
+
+executeUpdate () --- Bu genellikle veritabanlarını değiştirmek için kullanılır. Genelde DROP TABLE veya DATABASE, TABLE, UPDATE TABLE, INSERT TABLE deyimlerinden DELETE olarak kullanılır. Çıkış int şeklinde olacaktır . Bu int değeri, sorgudan etkilenen satır sayısını gösterir. 
+
+execute () --- SQL deyimlerini yürütmek için hangi yöntemi kullanacağınızı bilmiyorsanız, bu yöntem kullanılabilir. Bu bir boole döndürecektir . TRUE sonucun ResultSet olduğunu gösterirve FALSE , sorgudan etkilenen satır sayısını belirten int değerine sahip olduğunu belirtir.
+
+Kaynak: 
+Java Kitabı: Mehmet KİRAZLI-Sezer TANRIVERDİOĞLU
